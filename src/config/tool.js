@@ -2,7 +2,7 @@ import store from '../store/index'
 /**
 *   Toast公共方法
 */
-export function toast(str, icon) {
+export function toast (str, icon) {
   store.dispatch('showToast', true)
   if (icon === 'success') {
     store.dispatch('showSuccess', true)
@@ -19,11 +19,10 @@ export function toast(str, icon) {
 /**
  * dialog公共方法
  */
-export function alert(str) {
+export function alert (str) {
   store.dispatch('showAlert', true)
   store.dispatch('alertMsg', str)
   setTimeout(() => {
     store.dispatch('showAlert', false)
   }, 1500)
 }
-

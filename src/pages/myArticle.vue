@@ -61,7 +61,6 @@
     },
     created() {
       this.id = this.$route.params.id
-      // this.initIndex = this.tabs[this.id]
       this.getdata()
     },
     computed: {
@@ -71,11 +70,10 @@
       changeTab(index) {
         window.scroll(0, 0)
         this.initIndex = index
-        console.log(this.initIndex)
         if (index > 1) {
-          this.datalist = index ? this.topics : this.replies
-        } else {
           this.datalist = this.collect
+        } else {
+          this.datalist = index ? this.topics : this.replies
         }
       },
       getdata() {

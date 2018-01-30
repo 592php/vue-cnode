@@ -21,7 +21,7 @@ const state = {
 }
 const actions = {
   // 用户登录
-  async login({
+  async login ({
     commit
   }, data) {
     const res = await server.login(data)
@@ -38,7 +38,7 @@ const actions = {
     return res
   },
   // 获取消息信息
-  async getMessage({
+  async getMessage ({
     commit
   }) {
     let data = {
@@ -55,7 +55,7 @@ const actions = {
     return res
   },
   // 获取用户信息
-  async getUser({
+  async getUser ({
     commit
   }) {
     const res = await server.getUser(state.userInfo.loginname)
@@ -68,7 +68,7 @@ const actions = {
     return res
   },
     // 主题列表
-  async getList({
+  async getList ({
     commit
   }, data) {
     const res = await server.getList(data)
@@ -81,7 +81,7 @@ const actions = {
     return res
   },
   // 添加主题
-  async postArticle({
+  async postArticle ({
     commit
   }, data) {
     const res = await server.postArticle(data)
@@ -94,7 +94,7 @@ const actions = {
     return res
   },
   // 我的收藏
-  async userCollect({
+  async userCollect ({
     commit
   }) {
     const res = await server.userCollect(state.userInfo.loginname)
@@ -107,7 +107,7 @@ const actions = {
     return res
   },
   // 主题详情
-  async detailes({
+  async detailes ({
     commit
   }, data) {
     const res = await server.detailes(data)
@@ -120,7 +120,7 @@ const actions = {
     return res
   },
   // 退出登录
-  loginOut({
+  loginOut ({
     commit
   }) {
     localStorage.removeItem('loginStatus')
@@ -128,23 +128,23 @@ const actions = {
     commit(types.SET_LOGIN_STATUS, false)
     commit(types.SET_USER_INFO, {})
   },
-  showToast({
+  showToast ({
     commit
   }, status) {
     commit(types.COM_SHOW_TOAST, status)
   },
 
-  toastMsg({
+  toastMsg ({
     commit
   }, str) {
     commit(types.COM_TOAST_MSG, str)
   },
-  showAlert({
+  showAlert ({
     commit
   }, status) {
     commit(types.COM_SHOW_ALERT, status)
   },
-  alertMsg({
+  alertMsg ({
     commit
   }, str) {
     commit(types.COM_ALERT_MSG, str)
@@ -163,50 +163,50 @@ const getters = {
 }
 
 const mutations = {
-  [types.SET_USER_INFO](state, res) {
+  [types.SET_USER_INFO] (state, res) {
     state.userInfo = res
     state.userInfo = res
   },
 
-  [types.SET_LOGIN_STATUS](state, status) {
+  [types.SET_LOGIN_STATUS] (state, status) {
     state.loginStatus = status
   },
 
-  [types.GET_USER_DATA](state, res) {
+  [types.GET_USER_DATA] (state, res) {
     state.userData = res
   },
-  [types.COM_LOADING_STATUS](state, status) {
+  [types.COM_LOADING_STATUS] (state, status) {
     state.loading = status
   },
 
-  [types.COM_SHOW_TOAST](state, status) {
+  [types.COM_SHOW_TOAST] (state, status) {
     state.showToast = status
   },
 
-  [types.COM_SHOW_SUCCESS](state, status) {
+  [types.COM_SHOW_SUCCESS] (state, status) {
     state.showSuccess = status
   },
 
-  [types.COM_SHOW_FAIL](state, status) {
+  [types.COM_SHOW_FAIL] (state, status) {
     state.showFail = status
   },
 
-  [types.COM_TOAST_MSG](state, str) {
+  [types.COM_TOAST_MSG] (state, str) {
     state.toastMsg = str
   },
 
-  [types.COM_NAV_STATUS](state, status) {
+  [types.COM_NAV_STATUS] (state, status) {
     state.leftNavStatus = status
   },
 
-  [types.COM_SHOW_TIME_PICKER](state, status) {
+  [types.COM_SHOW_TIME_PICKER] (state, status) {
     state.showTimePicker = status
   },
 
-  [types.COM_SHOW_ALERT](state, status) {
+  [types.COM_SHOW_ALERT] (state, status) {
     state.showAlert = status
   },
-  [types.COM_ALERT_MSG](state, str) {
+  [types.COM_ALERT_MSG] (state, str) {
     state.alertMsg = str
   }
 

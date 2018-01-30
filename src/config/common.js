@@ -70,7 +70,6 @@ export const loadMore = {
   }
 }
 
-
 /**
  * 获取style样式
  */
@@ -131,8 +130,6 @@ export const getTabInfo = (tab, good, top, isClass) => {
   return isClass ? className : str
 }
 
-
-
 /**
  * 调用Timeago库显示到现在的时间
  */
@@ -157,7 +154,6 @@ export const getLastTimeStr = (time, friendly) => {
     return fmtDate(new Date(time), 'yyyy-MM-dd hh:mm')
   }
 }
-
 
 /**
  *   对Date的扩展，将 Date 转化为指定格式的String
@@ -187,5 +183,3 @@ const fmtDate = (date, fmt) => { // author: meizz
   }
   return fmt
 }
-
-

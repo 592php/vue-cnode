@@ -7,12 +7,12 @@
         <div class="col">
           <span>{{topic.author.loginname}}</span>
           <time>
-                              发布于:{{topic.create_at | getLastTimeStr(true)}}
-                          </time>
+            发布于:{{topic.create_at | getLastTimeStr(true)}}
+          </time>
         </div>
         <div class="right">
           <span class="tag" :class="getTabInfos(topic.tab, topic.good, topic.top, true)" v-text="getTabInfos(topic.tab, topic.good, topic.top, false)">
-                          </span>
+          </span>
           <span class="name">{{topic.visit_count}}次浏览</span>
         </div>
       </section>
@@ -30,17 +30,19 @@
               </router-link>
               <div class="info">
                 <span class="cl">
-                   <span class="name" v-text="item.author.loginname"></span>
-                <span class="name mt10">
-                      <span></span> 发布于:{{item.create_at | getLastTimeStr(true)}}</span>
+                  <span class="name" v-text="item.author.loginname"></span>
+                  <span class="name mt10">
+                    <span></span> 发布于:{{item.create_at | getLastTimeStr(true)}}</span>
                 </span>
                 <span class="cr">
-                   <span @click="upReply(item)" class="iconfont icon-dianzan"></span> {{item.ups.length}}
-                <span class="iconfont icon-iconfankui" @click="addReply(item.id)"></span>
+                  <span @click="upReply(item)" class="iconfont icon-dianzan"></span> {{item.ups.length}}
+                  <span class="iconfont icon-iconfankui" @click="addReply(item.id)"></span>
                 </span>
               </div>
             </section>
             <div class="reply_content" v-html="item.content"></div>
+            <nv-reply :topic.sync="topic" :topic-id="topicId" :reply-id="item.id" :reply-to="item.author.loginname" :show.sync="curReplyId"
+              @close="hideItemReply" v-if="userInfo.userId && curReplyId === item.id"></nv-reply>
           </li>
         </ul>
       </section>
@@ -53,64 +55,73 @@
 </template>
 
 <script>
-import { getLastTimeStr, getTabInfo } from '@/config/common'
-import {
+  import {
+    getLastTimeStr,
+    getTabInfo
+  } from '@/config/common'
+  import nvReply from '@/components/reply.vue'
+  import {
     mapGetters
   } from 'vuex'
-export default {
-  data() {
-    return {
-      topic: {}, // 主题
-      noData: false,
-      showMenu: false,
-      topicId: '',
-      curReplyId: ''
-    }
-  },
-  filters: {
-    getLastTimeStr(time, isFromNow) {
-      return getLastTimeStr(time, isFromNow)
-    }
-  },
-  created() {
-    this.getData(this.$route.params.id)
-    if (this.loginStatus) {
-
-    }
-  },
-  computed: {
-    ...mapGetters(['loginStatus', 'userInfo'])
-  },
-  methods: {
-    getLastTimeStrs(time, ago) {
-      debugger
-      return getLastTimeStr(time, ago)
+  export default {
+    components: {
+      nvReply
     },
+    data() {
+      return {
+        topic: {}, // 主题
+        noData: false,
+        showMenu: false,
+        topicId: '',
+        curReplyId: ''
+      }
+    },
+    filters: {
+      getLastTimeStr(time, isFromNow) {
+        return getLastTimeStr(time, isFromNow)
+      }
+    },
+    created() {
+      this.getData(this.$route.params.id)
+      if (this.loginStatus) {
+
+      }
+    },
+    computed: {
+      ...mapGetters(['loginStatus', 'userInfo'])
+    },
+    methods: {
+      getLastTimeStrs(time, ago) {
+        debugger
+        return getLastTimeStr(time, ago)
+      },
       // 获取不同tab的样式或者标题
-    getTabInfos(tab, good, top, isClass) {
-      return getTabInfo(tab, good, top, isClass)
-    },
-    getData(id) {
-      this.$store.dispatch('detailes', id).then(res => {
-        if (res.success) {
-          this.topic = res.data
-        }
-      })
-    },
-    upReply(id) {
-      console.log(id)
-    }
+      getTabInfos(tab, good, top, isClass) {
+        return getTabInfo(tab, good, top, isClass)
+      },
+      getData(id) {
+        this.$store.dispatch('detailes', id).then(res => {
+          if (res.success) {
+            this.topic = res.data
+          }
+        })
+      },
+      upReply(id) {
+        console.log(id)
+      }
 
+    }
   }
-}
+
 </script>
 
 <style lang="scss" scoped>
   @import '../assets/css/px2rem';
-  .page{
+  .page {
     width: 100%;
     height: 100%;
   }
+
   .topic-title {
     padding: $gap;
     margin: $padding;
@@ -120,6 +131,7 @@ export default {
     background-color: $colorf0;
     border-radius: $gap;
   }
+
   .author-info {
     display: flex;
     align-items: center;
@@ -166,6 +178,7 @@ export default {
       }
     }
   }
+
   .topic-content {
     padding: $padding;
     margin-top: $padding;
@@ -175,6 +188,7 @@ export default {
       color: $red;
     }
   }
+
   .topic-reply {
     @extend .title;
     padding: $padding;
@@ -183,6 +197,7 @@ export default {
       color: #42b983;
     }
   }
+
   .reply_num {
     margin-top: $gap*4;
     background-color: $colore7;
@@ -190,6 +205,7 @@ export default {
     border-top: solid 1px $colord4;
     border-bottom: solid 1px $colord4;
   }
+
   .reply-list {
     width: 100%;
     margin-top: $gap*3;
@@ -221,6 +237,7 @@ export default {
     }
   }
   /* 回复框样式 */
+
   .reply {
     margin: 0 $padding;
     textarea {
@@ -248,8 +265,8 @@ export default {
       vertical-align: middle;
     }
   }
-  
-.display-flex {
+
+  .display-flex {
     display: -moz-box;
     /* Firefox */
     display: -ms-flexbox;
@@ -260,110 +277,111 @@ export default {
     /* Chrome, WebKit */
     display: flexbox;
     display: flex;
-}
+  }
 
-.break {
+  .break {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
+  }
 
 
-.user {
+  .user {
     width: 95%;
     margin: $gap*2 0;
     padding: 0 $gap*2;
     display: flex;
     .tab {
-        display: inline-block;
-        width: $gap*8;
-        color: $color62;
-        border-radius: $gap;
-        background-color: $colore7;
-        margin-right: $gap*2;
-        text-align: center;
-        height: $gap*4;
-        line-height: $gap*4;
-        vertical-align: middle;
+      display: inline-block;
+      width: $gap*8;
+      color: $color62;
+      border-radius: $gap;
+      background-color: $colore7;
+      margin-right: $gap*2;
+      text-align: center;
+      height: $gap*4;
+      line-height: $gap*4;
+      vertical-align: middle;
     }
     .good {
-        background-color: $color80;
-        color: $colorfff;
+      background-color: $color80;
+      color: $colorfff;
     }
     .title {
-        font-size: $gap*3.6;
-        font-weight: bold;
-        display: block;
-        width: 100%;
-        flex: 1;
-        @extend .break;
+      font-size: $gap*3.6;
+      font-weight: bold;
+      display: block;
+      width: 100%;
+      flex: 1;
+      @extend .break;
     }
     .head {
-        display: inline-block;
+      display: inline-block;
+      width: $gap*9;
+      height: $gap*9;
+      margin-right: $gap*2;
+      border-radius: 10px;
+      img {
         width: $gap*9;
-        height: $gap*9;
-        margin-right: $gap*2;
-        border-radius: 10px;
-        img {
-            width: $gap*9;
-            border: 2px solid #fff6e6;
-            border-radius: 50%;
-        }
+        border: 2px solid #fff6e6;
+        border-radius: 50%;
+      }
     }
     .info {
-        overflow: hidden;
-        display: block;
+      overflow: hidden;
+      display: block;
+      width: 100%;
+      flex: 1;
+      &:after {
+        clear: both;
+      }
+      .t-title {
+        font-size: $gap*3.6;
+        font-weight: bold;
         width: 100%;
-        flex: 1;
-        &:after {
-            clear: both;
+        color: #333;
+        @extend .break;
+      }
+      .mt12 {
+        margin-top: 12px;
+      }
+      .cl {
+        display: inline-block;
+        width: 68%;
+        .name {
+          color: $color62;
         }
-        .t-title {
-            font-size: $gap*3.6;
-            font-weight: bold;
-            width: 100%;
-            color: #333;
-            @extend .break;
+        .mt10 {
+          margin-top: $gap*2;
         }
-        .mt12 {
-            margin-top: 12px;
+      }
+      .cr {
+        width: 30%;
+        display: inline-block;
+        text-align: right;
+        .name {
+          margin-top: $gap*2;
+          color: $color80;
+          font-size: $gap*2.4;
         }
-        .cl {
-            display: inline-block;
-            width: 68%;
-            .name {
-                color: $color62;
-            }
-            .mt10 {
-                margin-top: $gap*2;
-            }
-        }
-        .cr {
-            width: 30%;
-            display: inline-block;
-            text-align: right;
-            .name {
-                margin-top: $gap*2;
-                color: $color80;
-                font-size: $gap*2.4;
-            }
-        }
+      }
     }
-}
-.reply_content {
+  }
+
+  .reply_content {
     padding: 0 $gap*3;
     margin-bottom: $gap*3;
     img {
-        width: auto\9;
-        height: auto;
-        max-width: 100%;
-        vertical-align: middle;
-        border: 0;
-        -ms-interpolation-mode: bicubic;
+      width: auto\9;
+      height: auto;
+      max-width: 100%;
+      vertical-align: middle;
+      border: 0;
+      -ms-interpolation-mode: bicubic;
     }
     p {
-        line-height: 1.3;
+      line-height: 1.3;
     }
-}
+  }
 
 </style>
