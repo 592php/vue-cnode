@@ -27,7 +27,7 @@
       'v-nav': tab,
       'v-list': pageList
     },
-    data() {
+    data () {
       const tabs = {
         replies: 0,
         topics: 1,
@@ -59,7 +59,7 @@
         id: 'replies'
       }
     },
-    created() {
+    created () {
       this.id = this.$route.params.id
       this.getdata()
     },
@@ -67,7 +67,7 @@
       ...mapGetters(['loginStatus', 'userInfo'])
     },
     methods: {
-      changeTab(index) {
+      changeTab (index) {
         window.scroll(0, 0)
         this.initIndex = index
         if (index > 1) {
@@ -76,7 +76,7 @@
           this.datalist = index ? this.topics : this.replies
         }
       },
-      getdata() {
+      getdata () {
         this.loading = true
         this.$store.dispatch('userCollect').then(res => {
           if (res.success) {
@@ -93,10 +93,9 @@
           this.loading = false
         })
       },
-      loadMore() {}
+      loadMore () { }
     }
   }
-
 </script>
 <style lang="scss" scoped>
   @import '../assets/css/px2rem';
@@ -108,7 +107,7 @@
       justify-content: center;
       align-items: center;
       .i-avatar {
-        display: flex; // margin: px2rem(40px) px2rem(30px) 0;
+        display: flex;
       }
       .user-d {
         margin-top: px2rem(10px);
@@ -193,5 +192,4 @@
       }
     }
   }
-
 </style>

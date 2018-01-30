@@ -35,22 +35,22 @@
                     <span></span> 发布于:{{item.create_at | getLastTimeStr(true)}}</span>
                 </span>
                 <span class="cr">
-                  <span @click="upReply(item)" class="iconfont icon-dianzan"></span> {{item.ups.length}}
+                  <span @click="upReply(index)"  :class="{'uped':isUps(item.ups)}" class="iconfont icon-dianzan"></span> {{item.ups.length}}
                   <span class="iconfont icon-iconfankui" @click="addReply(item.id)"></span>
                 </span>
               </div>
             </section>
             <div class="reply_content" v-html="item.content"></div>
             <nv-reply :topic.sync="topic" :topic-id="topicId" :reply-id="item.id" :reply-to="item.author.loginname" :show.sync="curReplyId"
-              @close="hideItemReply" v-if="userInfo.userId && curReplyId === item.id"></nv-reply>
+              @close="hideItemReply" v-if="userInfo.id && curReplyId === item.id"></nv-reply>
           </li>
         </ul>
       </section>
-
     </div>
     <div class='no-data' v-if="noData">
       <i class="iconfont icon-empty">&#xe60a;</i> 该话题不存在!
     </div>
+    <v-alert v-show="showAlert"></v-alert>
   </div>
 </template>
 
@@ -59,15 +59,18 @@
     getLastTimeStr,
     getTabInfo
   } from '@/config/common'
+  import * as _ from '@/config/tool'
   import nvReply from '@/components/reply.vue'
+  import alert from '@/components/alert'
   import {
     mapGetters
   } from 'vuex'
   export default {
     components: {
-      nvReply
+      nvReply,
+      'v-alert': alert
     },
-    data() {
+    data () {
       return {
         topic: {}, // 主题
         noData: false,
@@ -77,42 +80,69 @@
       }
     },
     filters: {
-      getLastTimeStr(time, isFromNow) {
+      getLastTimeStr (time, isFromNow) {
         return getLastTimeStr(time, isFromNow)
       }
     },
-    created() {
-      this.getData(this.$route.params.id)
-      if (this.loginStatus) {
-
-      }
-    },
     computed: {
-      ...mapGetters(['loginStatus', 'userInfo'])
+      ...mapGetters(['token', 'userInfo', 'showAlert'])
+    },
+    created () {
+      this.getData(this.$route.params.id)
+      if (this.loginStatus) { }
     },
     methods: {
-      getLastTimeStrs(time, ago) {
-        debugger
+      getLastTimeStrs (time, ago) {
         return getLastTimeStr(time, ago)
       },
       // 获取不同tab的样式或者标题
-      getTabInfos(tab, good, top, isClass) {
+      getTabInfos (tab, good, top, isClass) {
         return getTabInfo(tab, good, top, isClass)
       },
-      getData(id) {
+      getData (id) {
         this.$store.dispatch('detailes', id).then(res => {
           if (res.success) {
             this.topic = res.data
           }
         })
       },
-      upReply(id) {
-        console.log(id)
+      isUps (ups) {
+        return ups.indexOf(this.userInfo.id) >= 0
+      },
+      upReply (index) {
+        let item = this.topic.replies[index]
+        let data = {
+          accesstoken: this.token,
+          id: item.id
+        }
+        this.$store.dispatch('replyUps', data).then(res => {
+          if (res.success) {
+            if (res.action === 'down') {
+              let reast = item.ups.indexOf(this.userInfo.id)
+              item.ups.splice(reast, 1)
+              _.alert('取消成功')
+            } else {
+              item.ups.push(this.userInfo.id)
+              _.alert('操作成功')
+            }
+          } else {
+            _.alert(res.error_msg)
+          }
+        })
+      },
+      addReply (id) {
+        this.curReplyId = id
+        if (!this.userInfo.id) {
+          this.$router.push({
+            name: 'login'
+          })
+        }
+      },
+      hideItemReply () {
+        this.curReplyId = ''
       }
-
     }
   }
-
 </script>
 
 <style lang="scss" scoped>
@@ -236,6 +266,7 @@
       }
     }
   }
+
   /* 回复框样式 */
 
   .reply {
@@ -284,7 +315,6 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
 
   .user {
     width: 95%;
@@ -359,6 +389,10 @@
         width: 30%;
         display: inline-block;
         text-align: right;
+        .iconfont{
+          font-size: 22px;
+          font-weight: bold;
+        }
         .name {
           margin-top: $gap*2;
           color: $color80;
@@ -383,5 +417,4 @@
       line-height: 1.3;
     }
   }
-
 </style>

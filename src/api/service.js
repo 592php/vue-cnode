@@ -35,3 +35,8 @@ export function userCollect (data) {
   return axios.get('/topic_collect/' + data)
    .then(res => res.data)
 }
+// 为评论点赞，取消赞
+export function replyUps (data) {
+  return axios.post('/reply/' + data.id + '/ups', {...data})
+   .then(res => res.data)
+}

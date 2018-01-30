@@ -54,7 +54,7 @@ export default {
   components: {
     group
   },
-  data() {
+  data () {
     return {
       cellLists1: [
         {
@@ -107,7 +107,7 @@ export default {
 
     }
   },
-  created() {
+  created () {
     if (this.loginStatus) {
       this.$store.dispatch('getMessage').then(res => {
         if (res.success) {
