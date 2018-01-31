@@ -6,18 +6,18 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  data() {
+  data () {
     return {
     }
   },
-  created() {
+  created () {
     this.getdata()
   },
   computed: {
     ...mapGetters(['loginStatus', 'userInfo'])
   },
   methods: {
-    getdata() {
+    getdata () {
       this.loading = true
       this.$store.dispatch('getUser').then(res => {
         if (res.success) {
@@ -27,8 +27,6 @@ export default {
         }
         this.loading = false
       })
-    },
-    loadMore() {
     }
   }
 }

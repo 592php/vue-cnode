@@ -35,6 +35,12 @@ export function userCollect (data) {
   return axios.get('/topic_collect/' + data)
    .then(res => res.data)
 }
+// 新建评论
+export function replies (data) {
+  return axios.post('/topic/' + data.topic_id + '/replies', {...data})
+   .then(res => res.data)
+}
+
 // 为评论点赞，取消赞
 export function replyUps (data) {
   return axios.post('/reply/' + data.id + '/ups', {...data})

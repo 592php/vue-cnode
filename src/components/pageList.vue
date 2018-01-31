@@ -30,23 +30,23 @@
 <script>
 import { getLastTimeStr, getTabInfo, loadMore } from '@/config/common'
 export default {
-  data() {
+  data () {
     return {
     }
   },
   filters: {
-    getLastTimeStr(time, isFromNow) {
+    getLastTimeStr (time, isFromNow) {
       return getLastTimeStr(time, isFromNow)
     }
   },
   props: ['datalist'],
   mixins: [loadMore],
   methods: {
-    loadMores() {
+    loadMores () {
       this.$emit('loads')
     },
      // 获取不同tab的样式或者标题
-    getTabInfos(tab, good, top, isClass) {
+    getTabInfos (tab, good, top, isClass) {
       return getTabInfo(tab, good, top, isClass)
     }
   }

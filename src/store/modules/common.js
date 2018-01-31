@@ -118,6 +118,18 @@ const actions = {
 
     return res
   },
+   // 新建评论
+  async replies ({ commit }, data) {
+    const res = await server
+      .replies(data)
+      .then(res => {
+        return res
+      })
+      .catch(err => {
+        return err.response.data
+      })
+    return res
+  },
   // 点赞、取消👍
   async replyUps ({ commit }, data) {
     const res = await server
