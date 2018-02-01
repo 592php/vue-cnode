@@ -62,11 +62,11 @@ export default {
           iconUrl: 'http://hzzly.net/xyy-vue/images/user-cert.png',
           text: '我的消息',
           desc: '',
-          badg: '4',
+          badg: '',
           more: true
         },
         {
-          link: 'user/info',
+          link: '',
           iconUrl: 'http://hzzly.net/xyy-vue/images/user-detail.png',
           text: '我的收藏',
           desc: '',
@@ -74,7 +74,7 @@ export default {
           more: true
         },
         {
-          link: 'user/msg',
+          link: '',
           iconUrl: 'http://hzzly.net/xyy-vue/images/user-message.png',
           text: '个人资料',
           desc: '',
@@ -84,7 +84,7 @@ export default {
       ],
       cellLists2: [
         {
-          link: 'user/set',
+          link: '',
           iconUrl: 'http://hzzly.net/xyy-vue/images/user-set.png',
           text: '关于',
           desc: '',
@@ -111,7 +111,7 @@ export default {
     if (this.loginStatus) {
       this.$store.dispatch('getMessage').then(res => {
         if (res.success) {
-          console.log(res)
+          // console.log(res)
         }
       })
       this.$store.dispatch('getUser').then(res => {

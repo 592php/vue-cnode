@@ -1,6 +1,6 @@
 <template>
   <section class="reply">
-    <textarea id="content" rows="8" class="text" :class="{'err':hasErr}" v-model="content" placeholder='回复支持Markdown语法,请注意标记代码'>
+    <textarea id="content" rows="8" class="text" :class="{'err':hasErr}" v-model="content" placeholder='请输入评论内容'>
       </textarea>
     <a class="button" @click="addReply">确定</a>
   </section>
@@ -8,7 +8,7 @@
 
 <script>
 import { linkUsers } from '@/config/common'
-const markdown = require('markdown').markdown
+// const markdown = require('markdown').markdown
 export default {
   replace: true,
   props: ['topic', 'replyId', 'topicId', 'replyTo', 'show'],
@@ -26,8 +26,6 @@ export default {
   },
   methods: {
     addReply () {
-      console.log(this)
-      // debugger
       if (!this.content) {
         this.hasErr = true
       } else {
