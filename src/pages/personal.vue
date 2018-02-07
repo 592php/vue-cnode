@@ -58,7 +58,7 @@ export default {
     return {
       cellLists1: [
         {
-          link: '',
+          link: '/messages',
           iconUrl: 'http://hzzly.net/xyy-vue/images/user-cert.png',
           text: '我的消息',
           desc: '',
@@ -66,7 +66,7 @@ export default {
           more: true
         },
         {
-          link: '',
+          link: '/myarticle/collect',
           iconUrl: 'http://hzzly.net/xyy-vue/images/user-detail.png',
           text: '我的收藏',
           desc: '',

@@ -20,19 +20,23 @@
         <div class="login-btn" @click="_login">登录</div>
       </form>
     </div>
+     <div class="forgets">
+      <router-link to=""></router-link>
+      <router-link to="/register">注册账号>></router-link>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'login',
-  data() {
+  data () {
     return {
       accesstoken: ''
     }
   },
   methods: {
-    _login() {
+    _login () {
       if (!this.accesstoken) {
         // _.alert('请填写完整')
         return
@@ -40,7 +44,12 @@ export default {
       let data = {
         accesstoken: this.accesstoken
       }
-      this.$store.dispatch('login', data)
+      this.$store.dispatch('login', data).then(res => {
+        if (res.success) {
+          localStorage.setItem('accesstoken', JSON.stringify(data.accesstoken))
+          this.$router.push('/personal')
+        }
+      })
     }
   }
 }

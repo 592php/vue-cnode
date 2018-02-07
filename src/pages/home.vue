@@ -16,7 +16,7 @@ export default {
     'v-nav': tab,
     'v-list': pageList
   },
-  data() {
+  data () {
     return {
       initIndex: 0,
       params: {
@@ -48,7 +48,7 @@ export default {
       id: ''
     }
   },
-  created() {
+  created () {
     this.id = this.$route.params.id
     this.getdata()
   },
@@ -56,16 +56,16 @@ export default {
     ...mapGetters(['userInfo'])
   },
   methods: {
-    changeTab(index) {
+    changeTab (index) {
       window.scroll(0, 0)
       this.initIndex = index
       this.params.tab = this.itemTab[index].type
       this.getdata(true)
     },
-    post() {
+    post () {
       this.$router.push('/user/post')
     },
-    getdata(tab) {
+    getdata (tab) {
       this.loading = true
       this.$store.dispatch('getList', this.params).then(res => {
         if (res.success) {
@@ -81,7 +81,7 @@ export default {
         this.loading = false
       })
     },
-    loadMore() {
+    loadMore () {
       if (this.listMore && !this.loading) {
         this.params.page++
         this.getdata()
