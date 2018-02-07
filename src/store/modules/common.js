@@ -142,6 +142,18 @@ const actions = {
       })
     return res
   },
+  // 获取已读和未读消息
+  async messages ({ commit }, data) {
+    const res = await server
+      .messages(data)
+      .then(res => {
+        return res
+      })
+      .catch(err => {
+        return err.response.data
+      })
+    return res
+  },
   // 退出登录
   loginOut ({ commit }) {
     localStorage.removeItem('loginStatus')

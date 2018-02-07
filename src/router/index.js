@@ -7,6 +7,7 @@ import Register from '@/pages/register'
 import postArticle from '@/pages/postArticle'
 import myArticle from '@/pages/myArticle'
 import detailes from '@/pages/detailes'
+import messages from '@/pages/myMessage'
 
 Vue.use(Router)
 
@@ -43,5 +44,9 @@ export default new Router({
     path: '/detailes/:id',
     name: 'detailes',
     component: detailes
+  }, {
+    path: '/messages',
+    name: 'messages',
+    component: messages
   }]
 })

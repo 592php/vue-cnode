@@ -14,7 +14,7 @@
 				</router-link>
 			</div>
 			<div class="tab-item">
-				<router-link to="/travel">
+				<router-link to="/messages">
 					<div class="tab-icon"> <i class="iconfont icon-xiaoxi"></i></div>
 					<div class="tab-text">消息</div>
 				</router-link>
@@ -31,11 +31,11 @@
 
 <script>
 	export default {
-	  data() {
+	  data () {
 	    return {}
   },
 	  computed: {
-	    isShowTabbar() {
+	    isShowTabbar () {
 	      let routeLength = this.$route.path.split('/').length
 	      return !(routeLength > 2)
     }

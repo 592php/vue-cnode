@@ -46,3 +46,9 @@ export function replyUps (data) {
   return axios.post('/reply/' + data.id + '/ups', {...data})
    .then(res => res.data)
 }
+
+// 获取已读和未读消息
+export function messages (data) {
+  return axios.get('/messages/?' + qs.stringify(data))
+   .then(res => res.data)
+}
