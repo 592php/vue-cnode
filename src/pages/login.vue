@@ -3,7 +3,7 @@
     <div class="title"></div>
     <div class="coordinates-icon">
       <div class="coordinates topAct">
-        <img src="../../assets/logo.png" />
+        <img src="../assets/logo.png" />
       </div>
       <div class="circle-1-1 circle-show-2"></div>
       <div class="circle-2-2 circle-show-1"></div>
@@ -57,7 +57,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  @import '../../assets/css/px2rem';
+  @import '../assets/css/px2rem';
   .login {
     width: 100%;
     height: 100%;
