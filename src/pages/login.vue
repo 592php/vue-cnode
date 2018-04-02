@@ -1,30 +1,30 @@
 <template>
-  <div class="login">
-    <div class="title"></div>
-    <div class="coordinates-icon">
-      <div class="coordinates topAct">
-        <img src="../assets/logo.png" />
-      </div>
-      <div class="circle-1-1 circle-show-2"></div>
-      <div class="circle-2-2 circle-show-1"></div>
-      <div class="circle-3-3 circle-show"></div>
-    </div>
-    <div class="login-form">
-      <form action="#">
-        <div class="user-pasw common-div">
-          <span class="pasw-icon common-icon">
-              <i class="iconfont  icon-miyao"></i>
-            </span>
-          <input type="password" name="password" v-model="accesstoken" placeholder="accesstoken" />
+    <div class="login">
+      <div class="title"></div>
+      <div class="coordinates-icon">
+        <div class="coordinates topAct">
+          <img src="../assets/logo.png" />
         </div>
-        <div class="login-btn" @click="_login">登录</div>
-      </form>
+        <div class="circle-1-1 circle-show-2"></div>
+        <div class="circle-2-2 circle-show-1"></div>
+        <div class="circle-3-3 circle-show"></div>
+      </div>
+      <div class="login-form">
+        <form action="#">
+          <div class="user-pasw common-div">
+            <span class="pasw-icon common-icon">
+                <i class="iconfont  icon-miyao"></i>
+              </span>
+            <input type="password" name="password" v-model="accesstoken" placeholder="accesstoken" />
+          </div>
+          <div class="login-btn" @click="_login">登录</div>
+        </form>
+      </div>
+      <div class="forgets">
+        <router-link to=""></router-link>
+        <router-link to="/register">注册账号>></router-link>
+      </div>
     </div>
-     <div class="forgets">
-      <router-link to=""></router-link>
-      <router-link to="/register">注册账号>></router-link>
-    </div>
-  </div>
 </template>
 
 <script>

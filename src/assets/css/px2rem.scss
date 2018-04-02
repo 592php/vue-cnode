@@ -103,7 +103,14 @@ $font-tag: 10px;
     bottom: 13px;
   }
 }
-
+.postBody__content {
+  color: #57727c;
+  font-size: 12px;
+  img {
+    width: 100%;
+    max-width: 350px;
+  }
+}
 .markdown-body {
   color: #333;
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
