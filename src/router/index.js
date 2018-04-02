@@ -10,7 +10,6 @@ import detailes from '@/pages/detailes'
 import messages from '@/pages/myMessage'
 
 Vue.use(Router)
-
 export default new Router({
   routes: [{
     path: '/',

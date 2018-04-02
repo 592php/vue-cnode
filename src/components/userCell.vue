@@ -2,7 +2,7 @@
     <div class="cell">
         <router-link :to="link">
             <div class="cell-l">
-                <img :src="iconUrl" class="cell-icon" v-show="iconUrl" alt="">
+                <i class="cell-icon iconfont" :class="iconUrl" ></i>
                 <span class="text">{{text}}</span>
             </div>
             <div class="cell-r">
@@ -11,6 +11,7 @@
                 <img v-show="more" src="../assets/images/more.png" class="more" alt="">
             </div>
         </router-link>
+
     </div>
 </template>
 <script>
@@ -24,13 +25,11 @@ export default {
     avatar: String,
     more: Boolean
   },
-  data() {
+  data () {
     return {
-
     }
   },
   methods: {
-
   }
 }
 </script>
@@ -53,6 +52,7 @@ export default {
                 width: px2rem(42px);
                 height: px2rem(42px);
                 vertical-align: middle;
+                color: #76d49b;
             }
             span {
                 font-size: 14px;

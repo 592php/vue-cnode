@@ -1,50 +1,59 @@
 <template>
-	<div class="user">
-		<div v-if="!loginStatus">
-			<div class="user-h">
-				<div class="avatar u-avatar">
-					<img src="../assets/images/user-img0.jpg" alt="">
-				</div>
-				<div class="u-button">
-					<router-link to="/login" class="t-login">登录</router-link>
-					<router-link to="/register" class="t-regist">注册</router-link>
-				</div>
-			</div>
-		</div>
-		<div v-else>
-			<div class="user-h islogin">
-				<div class="avatar i-avatar">
-					<img :src="userInfo.avatar_url" alt="">
-				</div>
-				<div class="user-d">
-					<p class="username">{{userInfo.loginname}}</p>
-				</div>
-			</div>
-		</div>
+  <div class="user">
+    <div v-if="!loginStatus">
+      <div class="user-h">
+        <div class="avatar u-avatar">
+          <img src="../assets/images/user-img0.jpg" alt="">
+        </div>
+        <div class="u-button">
+          <router-link to="/login" class="t-login">登录</router-link>
+          <router-link to="/register" class="t-regist">注册</router-link>
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <div class="user-h islogin">
+        <div class="avatar i-avatar">
+          <img :src="userInfo.avatar_url" alt="">
+        </div>
+        <div class="user-d">
+          <p class="username">{{userInfo.loginname}}</p>
+        </div>
+      </div>
+    </div>
     <div class="user-h-list">
-			<ul>
-				<li>
-					<router-link to="/myarticle/replies">
-              <span class="num">{{replies}}</span> 
-						<span>最近回复</span>
-					</router-link>
-				</li>
-				<li>
-					<router-link to="/myarticle/collect">
-						<span>我的收藏</span>
-					</router-link>
-				</li>
-				<li>
-					<router-link to="/myarticle/topics">
-            <span class="num">{{topics}}</span> 
-						<span>我的文章</span>
-					</router-link>
-				</li>
-			</ul>
-		</div>
-		<group :cell-lists="cellLists1"></group>
-		<group :cell-lists="cellLists2"></group>
-	</div>
+      <ul>
+        <li>
+          <router-link to="/myarticle/replies">
+            <span class="num">{{replies}}</span>
+            <span>最近回复</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/myarticle/collect">
+            <span>我的收藏</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/myarticle/topics">
+            <span class="num">{{topics}}</span>
+            <span>我的文章</span>
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <group :cell-lists="cellLists1"></group>
+    <group :cell-lists="cellLists2"></group>
+    <div class="logout" @click="signOut">
+      <div class="cell-l">
+        <i class="cell-icon iconfont icon-tuichu"></i>
+        <span class="text">退出登录</span>
+      </div>
+      <div class="cell-r">
+        <img src="../assets/images/more.png" class="more" alt="">
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -59,7 +68,7 @@ export default {
       cellLists1: [
         {
           link: '/messages',
-          iconUrl: 'http://hzzly.net/xyy-vue/images/user-cert.png',
+          iconUrl: 'icon-xiaoxi',
           text: '我的消息',
           desc: '',
           badg: '',
@@ -67,7 +76,7 @@ export default {
         },
         {
           link: '/myarticle/collect',
-          iconUrl: 'http://hzzly.net/xyy-vue/images/user-detail.png',
+          iconUrl: 'icon-shoucang1',
           text: '我的收藏',
           desc: '',
           badg: '',
@@ -75,7 +84,7 @@ export default {
         },
         {
           link: '',
-          iconUrl: 'http://hzzly.net/xyy-vue/images/user-message.png',
+          iconUrl: 'icon-weibiaoti1',
           text: '个人资料',
           desc: '',
           badg: '',
@@ -85,7 +94,7 @@ export default {
       cellLists2: [
         {
           link: '',
-          iconUrl: 'http://hzzly.net/xyy-vue/images/user-set.png',
+          iconUrl: 'icon-guanyu1',
           text: '关于',
           desc: '',
           badg: '',
@@ -93,7 +102,7 @@ export default {
         },
         {
           link: '',
-          iconUrl: 'http://hzzly.net/xyy-vue/images/user-call.png',
+          iconUrl: 'icon-bangdingyouxiang',
           text: '联系邮箱',
           desc: '326959013@qq.com',
           badg: '',
@@ -104,7 +113,6 @@ export default {
       pubTosportNum: 0,
       replies: 0,
       topics: 0
-
     }
   },
   created () {
@@ -124,20 +132,77 @@ export default {
   },
   computed: {
     ...mapGetters(['loginStatus', 'userInfo'])
+  },
+  methods: {
+    signOut () {
+      this.$store.dispatch('loginOut')
+      setTimeout(() => {
+        this.$route.push('/login')
+      }, 1000)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../assets/css/px2rem';
-
+.logout{
+        display: flex;
+        justify-content: space-between;
+        height: px2rem(95px);
+        line-height: px2rem(95px);
+        margin: 0 px2rem(20px);
+        border-bottom: 1px solid #f5f5f5;
+        .cell-l {
+            color: #555;
+            .cell-icon {
+                width: px2rem(42px);
+                height: px2rem(42px);
+                vertical-align: middle;
+                color: #76d49b;
+            }
+            span {
+                font-size: 14px;
+                margin-left: px2rem(10px);
+            }
+        }
+        .cell-r {
+            .badg {
+                display: inline-block;
+                color: #fff;
+                width: px2rem(35px);
+                height: px2rem(35px);
+                line-height: px2rem(38px);
+                text-align: center;
+                background: red;
+                border-radius: 50%;
+            }
+            .avatar {
+                position: absolute;
+                top: px2rem(10px);
+                right: px2rem(55px);
+                width: px2rem(80px);
+                height: px2rem(80px);
+                border-radius: 50%;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                }
+            }
+            .more {
+                width: px2rem(35px);
+                height: px2rem(35px);
+                vertical-align: middle;
+            }
+        }
+    }
 .user {
   height: 100%;
   .islogin {
     display: flex;
     flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    justify-content: center;
+    align-items: center;
     .i-avatar {
       display: flex;
       // margin: px2rem(40px) px2rem(30px) 0;
