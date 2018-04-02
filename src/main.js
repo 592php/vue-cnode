@@ -3,20 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import {getStore} from './config/common'
+import {getStore, urlMatch} from './config/common'
 import store from './store/index'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 const whiteList = ['/', '/home', '/login', '/register', '/detailes'] // 不重定向白名单
-function strt (str) {
-  let url = str.match(/([^/]+)/)
-  return '/' + url[0]
-}
 router.beforeEach((to, from, next) => {
   let userInfo = getStore('userInfo')
   if (!userInfo) {
-    if (whiteList.indexOf(strt(to.path)) !== -1) {
+    if (whiteList.indexOf(urlMatch(to.path)) !== -1) {
       next()
     } else {
       next('/login')

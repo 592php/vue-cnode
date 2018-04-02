@@ -332,3 +332,11 @@ export const throttle = (fn, wait, mustRun) => {
     }
   }
 }
+export const urlMatch = (str) => {
+  if (str.length > 2) {
+    let url = str.match(/([^/]+)/)
+    return '/' + url[0]
+  } else {
+    return '/'
+  }
+}
