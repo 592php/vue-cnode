@@ -1,4 +1,9 @@
+#基于vue.js重写Cnodejs.org社区的webapp [线上访问地址](http://demo.592php.com/vuecnode/)
+
+## 注意：当前项目代码已经升级到2.0，均采用vue-cli搭建的程序
+ 如果对你有帮助，请帮忙点star。
 ## 技术栈
+
 vue + vux + vue-router + webpack + ES6/7  + sass + flex
 
 # 项目运行
@@ -19,6 +24,9 @@ npm run dev
 npm run build
 
 ```
+### 代码检查[standardjs](https://standardjs.com/readme-zhcn.html)
+可在config/index.js 
+useEslint: true 设置是否启用
 
 # 项目目录配置
 
