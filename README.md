@@ -1,4 +1,4 @@
-# 基于vue.js重写Cnodejs.org社区的webapp [线上访问地址](http://demo.592php.com/vuecnode/)
+# 基于vue.js重写Cnodejs.org社区的webapp [线上访问地址](http://test.592php.com/vuecnode/)
 
 ## 注意：当前项目代码已经升级到2.0，均采用vue-cli搭建的程序
  如果对你有帮助，请帮忙点star。
